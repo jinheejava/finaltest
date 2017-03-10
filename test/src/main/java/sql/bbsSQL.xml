@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="jinh.bbs">
+	<select id="bbslist" parameterType="int" resultType="jinh.bbs.model.BbsDTO">
+		select * from (select rownum as rnum, a.* from (select * from jsp_bbs order by idx) a)b
+		where rnum >= (#{cp}-1)*#{ls}
+	</select>
+	<select id="bbsTotalcnt" resultType="int">
+		select count(idx) from jsp_bbs		
+	</select>
+	
+</mapper>
